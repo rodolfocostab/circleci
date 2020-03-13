@@ -2,7 +2,8 @@ stages:
   - generate-site
   - build-dev
 
-generate-site:
+generate:
+  stage: generate-site
   script:
     - 'mvn site'
   only:
@@ -11,8 +12,8 @@ generate-site:
   tags:
     - shell
 
-build-dev:
-  stage: build
+build:
+  stage: build-dev
   variables:
     IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
   script:
