@@ -5,6 +5,12 @@ stages:
 generate-site:
   script:
     - 'mvn site'
+  only:
+    branches:
+      - dev
+  when: manual
+  tags:
+    - shell
 
 build-dev:
   stage: build
@@ -14,3 +20,9 @@ build-dev:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build -t $IMAGE_TAG .
     - docker push $IMAGE_TAG
+  only:
+    branches:
+      - dev
+  when: manual
+  tags:
+    - shell
