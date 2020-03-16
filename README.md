@@ -1,2 +1,2 @@
-# circleci
-Teste com circle-ci
+# GitLab CI/CD
+Teste com CI/CD
