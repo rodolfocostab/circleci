@@ -1,12 +1,4 @@
-# version: 2.1
-# workflows:
-#   maven_test:
-#     jobs:
-#       build:
-#         docker:
-#           - image: circleci/jdk8:0.1.1
-#             - command: 'mvn test'    
-
+  
 orbs:
   maven: circleci/maven@1.0.0
 version: 2.1
@@ -16,3 +8,19 @@ workflows:
     jobs:
       - maven/test:
           command: 'site'
+
+jobs:
+  check-and-build-only:
+    executor: docker/machine
+    steps:
+      - checkout
+      - docker/check
+      - docker/build:
+          image: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
+
+orbs:
+  docker: circleci/docker@1.0.0
+  workflows:
+    build-docker-image-only:
+      jobs:
+        - check-and-build-only
