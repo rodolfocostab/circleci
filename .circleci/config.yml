@@ -12,10 +12,8 @@ orbs:
 version: 2.1
 
 parameters:
-  maven_command:
-    default: mvn
 workflows:
   maven_build:
     jobs:
       - run:
-          command: << parameters.maven_command >> site
+          command: mvn site
