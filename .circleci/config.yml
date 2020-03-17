@@ -10,8 +10,12 @@
 orbs:
   maven: circleci/maven@1.0.0
 version: 2.1
+
+parameters:
+  maven_command:
+    default: mvn
 workflows:
   maven_build:
     jobs:
-      - maven/build:
-          command: 'site'
+      - run:
+          command: << parameters.maven_command >> site
