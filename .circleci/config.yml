@@ -7,11 +7,11 @@
 #           - image: circleci/jdk8:0.1.1
 #             - command: 'mvn test'    
 
-version: 2
-jobs:
-  build:
-    steps:
-      commands:
-      - checkout
-      - mvn site
-
+orbs:
+  maven: circleci/maven@x.y
+version: 2.1
+workflows:
+  maven_test:
+    jobs:
+      - maven/test:
+          command: '-X verify'
