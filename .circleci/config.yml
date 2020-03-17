@@ -1,28 +1,8 @@
-version: 2
-jobs:
-  docker:
-    - image: 'openjdk:8-alpine'
-  steps:
-    - attach_workspace:
-        name: Restore repository
-        at: '~'
-    - run:
-        name: Generate cache key
-        command: date +%Y-%m > .circle-cache-key
-    - restore_cache:
-        name: Restore dependencies
-        key: 'deps-{{checksum ".circle-cache-key"}}-'
-    - run:
-        name: Compile app
-        command: ./mvnw site
-    # - save_cache:
-    #     name: Save dependencies
-    #     key: >-
-    #       deps-{{checksum ".circle-cache-key"}}-{{ .Environment.CIRCLE_SHA1 }}-{{
-    #       .Environment.CIRCLE_WORKFLOW_ID }}
-    #     paths:
-    #       - ~/.m2
-  # deploy:
-  #   steps:
-  #     - commands:
-  #       - ssh ubuntu@34.229.228.223 'ls /'
+orbs:
+  maven: circleci/maven@x.y
+version: 2.1
+workflows:
+  maven_test:
+    jobs:
+      - maven/test:
+          command: '-X verify'
