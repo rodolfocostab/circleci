@@ -5,4 +5,4 @@ workflows:
       build:
         docker:
           - image: circleci/jdk8:0.1.1
-          - command: 'mvn test'          
+            - command: 'mvn test'          
