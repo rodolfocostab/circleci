@@ -1,8 +1,8 @@
-orbs:
-  maven: circleci/maven@
 version: 2.1
 workflows:
   maven_test:
     jobs:
-      - maven/test:
-          command: 'site'
+      build:
+        docker:
+          - image: circleci/jdk8:0.1.1
+          - command: 'mvn test'          
