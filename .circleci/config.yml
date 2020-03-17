@@ -14,5 +14,5 @@ jobs:
       - image: circleci/jdk8:0.1.1
     steps:
       - checkout
-      - run: mvn test
+      - run: java --version
 
